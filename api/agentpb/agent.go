@@ -93,7 +93,7 @@ func (m *JobResult) AgentMessageResponsePayload() isAgentMessage_Payload {
 	return &AgentMessage_JobResult{JobResult: m}
 }
 func (m *UnexpectedResponse) AgentMessageResponsePayload() isAgentMessage_Payload {
-	return &AgentMessage_JobResult{Unexpected: m}
+	return &AgentMessage_Unexpected{Unexpected: m}
 }
 
 // ServerMessage response payloads
