@@ -5,13 +5,13 @@ package agentpb
 
 import (
 	fmt "fmt"
+	math "math"
 	proto "github.com/golang/protobuf/proto"
 	_ "github.com/golang/protobuf/ptypes/duration"
 	_ "github.com/golang/protobuf/ptypes/timestamp"
-	github_com_mwitkow_go_proto_validators "github.com/mwitkow/go-proto-validators"
-	_ "github.com/percona/pmm/api/inventorypb"
 	_ "google.golang.org/genproto/googleapis/rpc/status"
-	math "math"
+	_ "github.com/percona/pmm/api/inventorypb"
+	github_com_mwitkow_go_proto_validators "github.com/mwitkow/go-proto-validators"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -566,6 +566,9 @@ func (this *JobProgress_MySQLBackup) Validate() error {
 func (this *JobProgress_MySQLRestoreBackup) Validate() error {
 	return nil
 }
+func (this *UnexpectedResponse) Validate() error {
+	return nil
+}
 func (this *AgentMessage) Validate() error {
 	if this.Status != nil {
 		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Status); err != nil {
@@ -667,6 +670,13 @@ func (this *AgentMessage) Validate() error {
 		if oneOfNester.JobProgress != nil {
 			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(oneOfNester.JobProgress); err != nil {
 				return github_com_mwitkow_go_proto_validators.FieldError("JobProgress", err)
+			}
+		}
+	}
+	if oneOfNester, ok := this.GetPayload().(*AgentMessage_Unexpected); ok {
+		if oneOfNester.Unexpected != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(oneOfNester.Unexpected); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Unexpected", err)
 			}
 		}
 	}

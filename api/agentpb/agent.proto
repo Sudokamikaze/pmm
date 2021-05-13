@@ -486,6 +486,9 @@ message JobProgress {
   }
 }
 
+// UnexpectedResponse is just unexpected response.
+message UnexpectedResponse {}
+
 message AgentMessage {
   // TODO https://jira.percona.com/browse/PMM-3449
 
@@ -513,6 +516,7 @@ message AgentMessage {
     JobStatusResponse job_status = 15;
     JobResult job_result = 16;
     JobProgress job_progress = 17;
+    UnexpectedResponse unexpected = 18;
   }
 }
 

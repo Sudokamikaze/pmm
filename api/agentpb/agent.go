@@ -92,6 +92,9 @@ func (m *JobProgress) AgentMessageResponsePayload() isAgentMessage_Payload {
 func (m *JobResult) AgentMessageResponsePayload() isAgentMessage_Payload {
 	return &AgentMessage_JobResult{JobResult: m}
 }
+func (m *UnexpectedResponse) AgentMessageResponsePayload() isAgentMessage_Payload {
+	return &AgentMessage_JobResult{Unexpected: m}
+}
 
 // ServerMessage response payloads
 func (m *Pong) ServerMessageResponsePayload() isServerMessage_Payload {
@@ -158,6 +161,7 @@ func (*StopActionRequest) sealed()       {}
 func (*StopActionResponse) sealed()      {}
 func (*StopJobRequest) sealed()          {}
 func (*StopJobResponse) sealed()         {}
+func (*UnexpectedResponse) sealed()      {}
 
 // check interfaces
 var (
@@ -178,6 +182,7 @@ var (
 	_ AgentResponsePayload = (*StartJobResponse)(nil)
 	_ AgentResponsePayload = (*StopJobResponse)(nil)
 	_ AgentResponsePayload = (*JobStatusResponse)(nil)
+	_ AgentResponsePayload = (*UnexpectedResponse)(nil)
 
 	// ServerMessage response payloads
 	_ ServerResponsePayload = (*Pong)(nil)
